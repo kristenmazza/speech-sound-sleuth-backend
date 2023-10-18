@@ -6,13 +6,25 @@ import cors from 'cors';
 import logger from 'morgan';
 import { join } from 'path';
 import { router } from './routes/router';
-
 dotenv.config();
+
 const port = process.env.PORT || 3000;
 const app = express();
 
-// Removes prepatory warnings for Mongoose 7.
+// Set up mongoose
 mongoose.set('strictQuery', false);
+
+const mongoDB = process.env.MONGODB_URI as string;
+
+async function connectDatabase(): Promise<void> {
+  await mongoose.connect(mongoDB);
+}
+
+try {
+  connectDatabase();
+} catch (error) {
+  console.error(error);
+}
 
 // Initialize middleware
 app.use(cors());
