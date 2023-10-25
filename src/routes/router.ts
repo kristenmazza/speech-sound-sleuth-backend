@@ -25,5 +25,8 @@ router.get('/final-time', timer.get_final_time);
 
 router.get('/reset-timer', timer.reset);
 
+// Add score for scene
+router.post('/:sceneTitle/:sound/scores', scene.add_score);
+
 // Get scores for scene
-// router.get('/:sceneTitle/:sound/scores)
+router.get('/:sceneTitle/:sound/scores', scene.score_list);
