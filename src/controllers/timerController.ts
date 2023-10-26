@@ -1,57 +1,76 @@
 import { Request, Response } from 'express';
 
 let isTimerRunning = false;
-let startTime = BigInt(0);
-let elapsedTime = BigInt(0);
+let startTime = 0;
+let elapsedTime = 0;
 
 export function start_timer(req: Request, res: Response) {
-  if (!isTimerRunning) {
-    isTimerRunning = true;
-    startTime = process.hrtime.bigint();
-  }
+  try {
+    if (!isTimerRunning) {
+      isTimerRunning = true;
+      startTime = Date.now();
+    }
 
-  res.json({ message: 'Timer started' });
+    res.json({ message: 'Timer started' });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ message });
+  }
 }
 
 export function pause_timer(req: Request, res: Response) {
-  if (isTimerRunning) {
-    isTimerRunning = false;
-    const elapsed = process.hrtime.bigint() - startTime;
-    elapsedTime += elapsed / BigInt(1000000);
-  }
+  try {
+    if (isTimerRunning) {
+      isTimerRunning = false;
+      const currentTime = Date.now();
+      const elapsed = currentTime - startTime;
+      elapsedTime += elapsed;
+    }
 
-  res.json({
-    message: `Timer paused with elapsed time: ${
-      elapsedTime / BigInt(1000)
-    } seconds`,
-  });
+    res.json({
+      message: `Timer paused with elapsed time: ${elapsedTime / 1000} seconds`,
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ message });
+  }
 }
 
 export function resume_timer(req: Request, res: Response) {
-  if (!isTimerRunning) {
-    isTimerRunning = true;
-    startTime = process.hrtime.bigint();
-  }
+  try {
+    if (!isTimerRunning) {
+      isTimerRunning = true;
+      startTime = Date.now();
+    }
 
-  res.json({
-    message: `Timer resumed`,
-  });
+    res.json({
+      message: `Timer resumed`,
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ message });
+  }
 }
 
 export function get_final_time(req: Request, res: Response) {
-  let finalTime;
-  if (isTimerRunning) {
-    const elapsed = process.hrtime.bigint() - startTime;
-    finalTime = elapsedTime + elapsed / BigInt(1000);
-  } else {
-    finalTime = elapsedTime / BigInt(1000);
+  try {
+    let finalTime;
+    if (isTimerRunning) {
+      const currentTime = Date.now();
+      const elapsed = currentTime - startTime;
+      finalTime = (elapsed + elapsedTime) / 1000;
+    } else {
+      finalTime = elapsedTime / 1000;
+    }
+    res.json({ finalTime });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ message });
   }
-
-  res.json({ finalTime });
 }
 
 export function reset(req: Request, res: Response) {
   isTimerRunning = false;
-  startTime = BigInt(0);
-  elapsedTime = BigInt(0);
+  startTime = 0;
+  elapsedTime = 0;
 }
