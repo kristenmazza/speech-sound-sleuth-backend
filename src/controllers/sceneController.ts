@@ -52,7 +52,7 @@ export const scene_details = asyncHandler(
         sound: sound,
       }).populate('hiddenImages');
 
-      if (!sceneTitle) {
+      if (!scene) {
         res.status(404).json({ message: 'Scene not found' });
       } else {
         res.send(scene);
@@ -114,7 +114,9 @@ export const score_list = asyncHandler(
       const scores = await Score.find({
         scene: scene,
         sound: sound,
-      }).populate('scene');
+      })
+        .populate('scene')
+        .sort({ timeInS: 1 });
 
       if (!scores || scores.length === 0) {
         res.status(404).json({ message: 'Scores not found' });
