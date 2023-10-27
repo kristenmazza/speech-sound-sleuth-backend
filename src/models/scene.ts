@@ -1,6 +1,6 @@
 import { Schema, model, Types } from 'mongoose';
 
-interface IScene {
+export interface IScene {
   title: string;
   sound: string;
   imageUrl: string;

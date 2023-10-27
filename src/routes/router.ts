@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as scene from '../controllers/sceneController';
 import * as timer from '../controllers/timerController';
-export const router = Router();
+export const router: Router = Router();
 
 router.get('/', scene.test);
 
@@ -30,3 +30,5 @@ router.post('/:sceneTitle/:sound/scores', scene.add_score);
 
 // Get scores for scene
 router.get('/:sceneTitle/:sound/scores', scene.score_list);
+
+export default router;

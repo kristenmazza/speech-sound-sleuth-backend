@@ -1,6 +1,6 @@
 import { Schema, model, Types } from 'mongoose';
 
-interface IScore {
+export interface IScore {
   nickname: string;
   timeInS: number;
   sound: string;
