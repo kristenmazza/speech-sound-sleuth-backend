@@ -7,10 +7,10 @@ import { join } from 'path';
 import { router } from './routes/router';
 dotenv.config();
 
-require('./mongoConfig');
-
 const port = process.env.PORT || 3000;
 const app = express();
+
+require('./mongoConfig');
 
 // Initialize middleware
 app.use(cors());
@@ -31,4 +31,4 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-module.exports = app;
+export default app;

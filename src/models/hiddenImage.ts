@@ -1,6 +1,6 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-export interface IHiddenImage {
+interface IHiddenImage {
   name: string;
   imageUrl: string;
   minX: number;
