@@ -27,8 +27,10 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
   res.status(500).send('Something went wrong');
 });
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+  });
+}
 
 export default app;
