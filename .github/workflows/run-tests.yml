@@ -3,7 +3,7 @@ name: Run Tests
 on:
   push:
     branches:
-      - main # Replace 'main' with the name of your default branch
+      - main
 
 jobs:
   test:
@@ -20,6 +20,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Set up Environment Variables
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        run: |
+          echo "MONGODB_URI=$MONGODB_URI" >> $GITHUB_ENV
 
       - name: Run Tests
         run: npm test
