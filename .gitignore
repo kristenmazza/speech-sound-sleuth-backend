@@ -3,3 +3,4 @@ node_modules
 dist/
 populatedb.ts
 coverage
+testData.ts
