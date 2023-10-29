@@ -69,12 +69,13 @@ export const add_score = [
 
   asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const errors = validationResult(req);
+    const sceneTitle = req.params.sceneTitle;
 
     if (!errors.isEmpty()) {
       res.status(400).json({ errors: errors.array() });
     }
 
-    const scene = await Scene.findOne({ title: req.body.scene });
+    const scene = await Scene.findOne({ title: sceneTitle });
 
     if (!scene) {
       res.status(404).json({ message: 'Scene not found' });
