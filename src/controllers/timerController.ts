@@ -28,7 +28,7 @@ export function pause_timer(req: Request, res: Response) {
     }
 
     res.json({
-      message: `Timer paused with elapsed time: ${elapsedTime / 1000} seconds`,
+      message: `Timer paused`,
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);

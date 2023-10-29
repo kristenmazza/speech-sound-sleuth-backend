@@ -23,6 +23,7 @@ router.get('/resume-timer', timer.resume_timer);
 // Get final time
 router.get('/final-time', timer.get_final_time);
 
+// Reset timer
 router.get('/reset-timer', timer.reset);
 
 // Add score for scene
@@ -30,5 +31,3 @@ router.post('/:sceneTitle/:sound/scores', scene.add_score);
 
 // Get scores for scene
 router.get('/:sceneTitle/:sound/scores', scene.score_list);
-
-export default router;
