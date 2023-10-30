@@ -29,7 +29,4 @@ jobs:
 
       - name: Run Tests
         run: npm test
-
-      - name: Run Tests
-        run: npm test
         timeout-minutes: 2
