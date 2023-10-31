@@ -1,6 +1,6 @@
 # Speech Sound Sleuth (Backend)
 
-Speech Sound Sleuth is a gamefied adaptation of the classic "Where's Waldo?" concept, designed to support speech therapy. In this game, players are presented with various scenes that contain items associated with specific speech sounds. The game is timed, so players are encouraged to find the items as fast as possible. Once an item is found, the timer pauses, and the player is prompted to practice saying the item's name before continuing the game. After all items are found, the player can enter a nickname to submit to the leaderboard.
+Speech Sound Sleuth is a gamified adaptation of the classic "Where's Waldo?" concept, designed to support speech therapy. In this game, players are presented with various scenes that contain items associated with specific speech sounds. The game is timed, so players are encouraged to find the items as fast as possible. Once an item is found, the timer pauses, and the player is prompted to practice saying the item's name before continuing the game. After all items are found, the player can enter a nickname to submit to the leaderboard.
 
 The backend is responsible for managing the game logic, handling requests from the frontend, and maintaining the leaderboard tables. The backend stores information about scenes, hidden items, and user scores.
 
