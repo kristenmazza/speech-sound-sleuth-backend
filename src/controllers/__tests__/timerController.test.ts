@@ -17,26 +17,29 @@ afterAll(async () => {
 });
 
 describe('Timer controller', () => {
+  let sessionID: string;
+
   it('should start the timer', async () => {
     const response = await request.get('/start-timer');
+    sessionID = response.body.sessionID;
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Timer started');
   });
 
   it('should pause the timer', async () => {
-    const response = await request.get('/pause-timer');
+    const response = await request.get(`/pause-timer/${sessionID}`);
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Timer paused');
   });
 
   it('should resume the timer', async () => {
-    const response = await request.get('/resume-timer');
+    const response = await request.get(`/resume-timer/${sessionID}`);
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Timer resumed');
   });
 
   it('should send a final time greater than 0 seconds', async () => {
-    const response = await request.get('/final-time');
+    const response = await request.get(`/final-time/${sessionID}`);
     expect(response.status).toBe(200);
     expect(response.body.finalTime).toBeGreaterThan(0);
   });
